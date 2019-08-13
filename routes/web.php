@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 
 Route::get('/sales','SalesController@index')->name('sales.index')->middleware('auth');
+Route::get('/sales/products','SalesController@products')->name('sales.products')->middleware('auth');
 
 
 Route::prefix('/admin')->namespace('Admin')->middleware('auth','role:mi')->group(function(){

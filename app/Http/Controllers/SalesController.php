@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ConsignmentOrderDetails;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -106,5 +107,34 @@ class SalesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function products(Request $request)
+    {
+        if ($request->ajax()) {
+           // $dates = explode(" - ", $request->salesRange);
+
+//        $data = ConsignmentOrderDetails::where('MITProductSKU',$request->sku)
+//            ->whereBetween('OrderDate',[$dates[0],$dates[1]]);
+        $data = ConsignmentOrderDetails::query();
+
+
+        return Datatables::of($data)->filter(function($query) use($request){
+            if($sku = $request->sku){
+                $query->where('MITProductSKU',$sku);
+            }
+            if($salesRange = $request->salesRange){
+                $dates = explode(" - ", $request->salesRange);
+                $query->whereBetween('OrderDate',[$dates[0],$dates[1]]);
+            }
+        })
+            ->addIndexColumn()
+            ->rawColumns(['MITProductSKU'])
+            ->setRowId(function ($data) {
+                return $data->MITProductSKU;
+            })->make(true);
+        }
+        return false;
     }
 }

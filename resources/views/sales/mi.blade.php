@@ -100,7 +100,7 @@
                 scrollCollapse: true,
                 processing: true,
                 stateSave: true,
-                serverSide:true,
+               // serverSide:true,
 
                 dom: '"<\'row\'<\'col-md-6\'B><\'col-md-6\'f>>" +\n' +
                     '"<\'row\'<\'col-sm-12\'tr>>" +\n' +
@@ -139,8 +139,6 @@
                 ajax: {
                     url: '{!! route('sales.index') !!}',
                     data: function (d) {
-                        d.startDate = $('#startDate').val();
-                        d.endDate = $('#endDate').val();
                         d.salesRange=$('#salesRange').val();
                     }
                 },
@@ -193,12 +191,119 @@
 
         $(document).on('click','.details-btn',function(e){
             e.stopPropagation();
-            let $tr = $(this).closest('tr');
-            let rowId = $tr.attr('id');
-            $('#modalProductDetails').on('shown.bs.modal', function(){
-                $(this).find(".modal-title").html("Details of - "+rowId);
+            let $modalProductDetails =  $('#modalProductDetails');
+
+            let tr = $(this).closest('tr');
+            let row = $productsTable.row( tr );
+            let rowId = tr.attr('id');
+            let name = row.data().Name;
+
+            $modalProductDetails.on('shown.bs.modal', function(){
+                $(this).find(".modal-title").html("Details - "+rowId+" - "+name);
+
+                $(this).find(".modal-body").html(`<table class="table table-striped table-bordered table-hover " id="products-details">
+                    <thead>
+                    <tr>
+                        <th>OrderID</th><th>SiteName</th><th>AccountName</th><th>Profile_Id</th><th>Marketplace Order ID</th><th>OMOrderNum</th>
+                        <th>OrderDate</th><th>MarketplaceSKU</th><th>MITProductSKU</th><th>SupplierID</th><th>SupplierSKU</th><th>UnitCost</th><th>QtySold</th>
+                        <th>UnitPrice</th><th>TaxPrice</th><th>ShippingPrice</th><th>ShippingCost</th><th>ShippingTaxPrice</th><th>TotalPrice</th>
+                    </tr>
+                    </thead>
+                </table>`);
+
+
+                $('#products-details').DataTable({
+                    pageLength: 25,
+                    lengthMenu: [[25, 50, 100, -1], [25, 50, 100, 'All']],
+                    scrollY: "50vh",
+                    scrollX: true,
+                    scrollCollapse: true,
+                    processing: true,
+                    stateSave: true,
+                    dom: '"<\'row\'<\'col-md-6\'B><\'col-md-6\'f>>" +\n' +
+                        '"<\'row\'<\'col-sm-12\'tr>>" +\n' +
+                        '"<\'row\'<\'col-sm-12 col-md-5\'i ><\'col-sm-12 col-md-7\'p>>"',
+                    buttons: {
+                        dom: {
+                            container: {
+                                tag: 'div',
+                                className: 'flexcontent'
+                            },
+                            buttonLiner: {
+                                tag: null
+                            }
+                        },
+
+                        buttons: [
+                            {
+                                extend: 'excelHtml5',
+                                text: '<i class="fas fa-file-excel"></i> Excel',
+                                title: 'Products to Excel',
+                                titleAttr: 'Excel',
+                                className: 'btn btn-success',
+                                init: function(api, node, config) {
+                                    $(node).removeClass('btn-secondary buttons-html5 buttons-excel')
+                                },
+                            },
+                            {
+                                extend: 'pageLength',
+                                titleAttr: 'Show Records',
+                                className: 'btn selectTable btn-primary',
+                            },
+                        ],
+                    },
+
+                    ajax: {
+                        url: '{!! route('sales.products') !!}',
+                        data: function (d) {
+                            d.sku = rowId;
+                            d.salesRange=$('#salesRange').val();
+                        }
+                    },
+                    columns: [
+                        {"data": "CA Order ID", name: "CA Order ID"},
+                        {"data": "sitename", name: "sitename"},
+                        {"data": "AccountName", name: "AccountName"},
+                        {"data": "Profile_Id", name: "Profile_Id"},
+                        {"data": "Marketplace Order ID", name: "Marketplace Order ID"},
+                        {"data": "OM Order Number", name: "OM Order Number"},
+                        {"data": "OrderDate", name: "OrderDate"},
+                        {"data": "MarketplaceSKU", name: "MarketplaceSKU"},
+                        {"data": "MITProductSKU", name: "MITProductSKU"},
+                        {"data": "SupplierID", name: "SupplierID"},
+                        {"data": "SupplierSKU", name: "SupplierSKU"},
+                        {"data": "UnitCost", name: "UnitCost"},
+                        {"data": "QtySold", name: "QtySold"},
+                        {"data": "UnitPrice", name: "UnitPrice"},
+                        {"data": "TaxPrice", name: "TaxPrice"},
+                        {"data": "ShippingPrice", name: "ShippingPrice"},
+                        {"data": "ShippingCost", name: "ShippingCost"},
+                        {"data": "ShippingTaxPrice", name: "ShippingTaxPrice"},
+                        {"data": "TotalPrice", name: "TotalPrice"},
+                    ],
+                    columnDefs: [
+                    {
+                        targets: [1,2,4,6],width: 220
+                    },
+                    {
+                        targets: [11,13,14,15,16,17,18],
+                        className: "text-right",
+                        render: $.fn.dataTable.render.number( ',', '.', 2, '$ ' )},
+                    {
+                        targets: [0,3,4,5,6,7,8,9,10,12],
+                        className: "text-center"
+                    },
+
+                ]
+
+                });
+
 
             }).modal('show');
+
+            $modalProductDetails.on('hidden.bs.modal', function(){
+                $(this).find(".modal-body").html('');
+            });
         });
 
 
