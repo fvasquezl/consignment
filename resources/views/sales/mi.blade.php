@@ -100,7 +100,7 @@
                 scrollCollapse: true,
                 processing: true,
                 stateSave: true,
-               // serverSide:true,
+                serverSide:true,
 
                 dom: '"<\'row\'<\'col-md-6\'B><\'col-md-6\'f>>" +\n' +
                     '"<\'row\'<\'col-sm-12\'tr>>" +\n' +
