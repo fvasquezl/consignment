@@ -134,7 +134,7 @@
                 $('#modalUsersCreate').on('shown.bs.modal', function(){
                     $('#usersForm')
                         .trigger("reset")
-                        .attr("action","/users")
+                        .attr("action","/admin/users")
                         .attr('method','POST');
                     $('#modelHeading').html("Create New User");
                 }).modal('show');
@@ -155,17 +155,19 @@
                 let rowId = $tr.attr('id');
                 $('#modalUsersCreate').on('shown.bs.modal', function(){
 
-                    let form = $('#usersForm');
-                    form.attr("action","/users/"+rowId)
+                    let $form = $('#usersForm');
+                    $form.attr("action","/admin/users/"+rowId)
                         .attr('method','PUT');
 
-                    $(form).trigger("reset");
+                    $form.trigger("reset");
+
+                    RemoveErrorsFields($form);
 
                     let user = getRowData(rowId);
 
                     $(this).find(".modal-title").html("Update User "+user.name);
 
-                    displayLabels(form,user);
+                    displayLabels($form,user);
 
                 }).modal('show');
             });
@@ -175,7 +177,7 @@
                 e.stopImmediatePropagation();
                 let $tr = $(this).closest('tr');
                 let rowId = $tr.attr('id');
-                let url = `/users/` + rowId;
+                let url = `/admin/users/` + rowId;
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",
