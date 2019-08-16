@@ -10,7 +10,7 @@
                 <table class="table table-striped table-bordered table-hover" id="products-table">
                     <thead>
                     <tr>
-                        <th>MITProductSKU</th>
+                        <th>MIProductSKU</th>
                         <th>SupplierSKU</th>
                         <th>UnitCost</th>
                         <th>Name</th>
@@ -102,9 +102,9 @@
                 stateSave: true,
                 serverSide:true,
 
-                dom: '"<\'row\'<\'col-md-6\'B><\'col-md-6\'f>>" +\n' +
-                    '"<\'row\'<\'col-sm-12\'tr>>" +\n' +
-                    '"<\'row\'<\'col-sm-12 col-md-5\'i ><\'col-sm-12 col-md-7\'p>>"',
+                dom:"<'row'<'col-sm-12 col-md-6 d-flex justify-content-start'f><'col-sm-12 col-md-6 d-flex justify-content-end'B>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
 
                 buttons: {
                     dom: {
@@ -123,7 +123,7 @@
                             text: '<i class="fas fa-file-excel"></i> Excel',
                             title: 'Products to Excel',
                             titleAttr: 'Excel',
-                            className: 'btn btn-success',
+                            className: 'btn btn-success mr-1',
                             init: function(api, node, config) {
                                 $(node).removeClass('btn-secondary buttons-html5 buttons-excel')
                             },
@@ -144,7 +144,7 @@
                 },
 
                 columns: [
-                    {"data":"MITProductSKU",name:"MITProductSKU"},
+                    {"data":"MIProductSKU",name:"MIProductSKU"},
                     {"data":"SupplierSKU",name:"SupplierSKU"},
                     {"data":"UnitCost",name:"UnitCost"},
                     {"data":"Name",name:"Name"},
@@ -205,7 +205,7 @@
                     <thead>
                     <tr>
                         <th>OrderID</th><th>SiteName</th><th>AccountName</th><th>Profile_Id</th><th>Marketplace Order ID</th><th>OMOrderNum</th>
-                        <th>OrderDate</th><th>MarketplaceSKU</th><th>MITProductSKU</th><th>SupplierID</th><th>SupplierSKU</th><th>UnitCost</th><th>QtySold</th>
+                        <th>OrderDate</th><th>MarketplaceSKU</th><th>MappedProductSKU</th><th>SupplierID</th><th>SupplierSKU</th><th>UnitCost</th><th>QtySold</th>
                         <th>UnitPrice</th><th>TaxPrice</th><th>ShippingPrice</th><th>ShippingCost</th><th>ShippingTaxPrice</th><th>TotalPrice</th>
                     </tr>
                     </thead>
@@ -269,7 +269,7 @@
                         {"data": "OM Order Number", name: "OM Order Number"},
                         {"data": "OrderDate", name: "OrderDate"},
                         {"data": "MarketplaceSKU", name: "MarketplaceSKU"},
-                        {"data": "MITProductSKU", name: "MITProductSKU"},
+                        {"data": "MappedProductSKU", name: "MappedProductSKU"},
                         {"data": "SupplierID", name: "SupplierID"},
                         {"data": "SupplierSKU", name: "SupplierSKU"},
                         {"data": "UnitCost", name: "UnitCost"},

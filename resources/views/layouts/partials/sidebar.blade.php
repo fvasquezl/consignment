@@ -48,6 +48,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('sales.index')}}"  class="{{(request()->is('sales') ? 'nav-link active' : 'nav-link')}}" >
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Sales Details
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"

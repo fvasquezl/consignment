@@ -26,11 +26,11 @@ class SalesController extends Controller
             $data = DB::select('exec [MiTech].[mi].[sp_SohnenSalesReport] ?,?',[$dates[0],$dates[1]]);
 
             return Datatables::of($data)
-                ->editColumn('MITProductSKU', '<a href="#" class="details-btn">{{$MITProductSKU}}</a>')
+                ->editColumn('MIProductSKU', '<a href="#" class="details-btn">{{$MIProductSKU}}</a>')
                 ->addIndexColumn()
-                ->rawColumns(['MITProductSKU'])
+                ->rawColumns(['MIProductSKU'])
                 ->setRowId(function ($data) {
-                    return $data->MITProductSKU;
+                    return $data->MIProductSKU;
                 })->make(true);
         }
 
@@ -122,7 +122,7 @@ class SalesController extends Controller
 
         return Datatables::of($data)->filter(function($query) use($request){
             if($sku = $request->sku){
-                $query->where('MITProductSKU',$sku);
+                $query->where('MappedProductSKU',$sku);
             }
             if($salesRange = $request->salesRange){
                 $dates = explode(" - ", $request->salesRange);
@@ -130,9 +130,9 @@ class SalesController extends Controller
             }
         })
             ->addIndexColumn()
-            ->rawColumns(['MITProductSKU'])
+            ->rawColumns(['MappedProductSKU'])
             ->setRowId(function ($data) {
-                return $data->MITProductSKU;
+                return $data->MappedProductSKU;
             })->make(true);
         }
         return false;

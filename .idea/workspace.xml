@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="dd7b8f57-8822-4c84-b773-0309fc9c2957" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SalesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SalesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Role.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/partials/navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/partials/navbar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/sales/mi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales/mi.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,22 +56,7 @@
         <item name="Mitech" type="feb32156:DbDataSourceImpl" />
         <item name="MiTech: database" type="ccb7ac2a:MsImplModel$Database" />
         <item name="mi: schema" type="2865ee2e:MsImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="Mitech" type="feb32156:DbDataSourceImpl" />
-        <item name="MiTech: database" type="ccb7ac2a:MsImplModel$Database" />
-        <item name="mi: schema" type="2865ee2e:MsImplModel$Schema" />
         <item name="views" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="Mitech" type="feb32156:DbDataSourceImpl" />
-        <item name="MiTech: database" type="ccb7ac2a:MsImplModel$Database" />
-        <item name="mi: schema" type="2865ee2e:MsImplModel$Schema" />
-        <item name="views" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="vw_ConsignmentOrderDetails: view" type="5f18b29c:MsImplModel$View" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -80,17 +68,6 @@
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="Remotes" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="Remotes" type="feb32156:DbDataSourceImpl" />
-        <item name="Sohnen: database" type="ccb7ac2a:MsImplModel$Database" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="Remotes" type="feb32156:DbDataSourceImpl" />
-        <item name="Sohnen: database" type="ccb7ac2a:MsImplModel$Database" />
-        <item name="dbo: schema" type="2865ee2e:MsImplModel$Schema" />
       </path>
     </expand>
     <select />
@@ -190,12 +167,6 @@
       <path value="$PROJECT_DIR$/vendor/maximebf/debugbar" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2356" />
-    <option name="y" value="93" />
-    <option name="width" value="650" />
-    <option name="height" value="758" />
-  </component>
   <component name="ProjectId" id="1P0s51LOPfpeCqUs5s29Uj00onG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -253,12 +224,12 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@701f444" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@55ad1a79" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@701f444" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@57ed47e" type="9fbbdea:ServiceModel$ServiceNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@55ad1a79" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@5e4fa397" type="9fbbdea:ServiceModel$ServiceNode" />
             </path>
           </expand>
           <select />
@@ -288,7 +259,10 @@
       <workItem from="1565022172094" duration="13994000" />
       <workItem from="1565042422799" duration="7585000" />
       <workItem from="1565372296869" duration="42511000" />
-      <workItem from="1565719629930" duration="18226000" />
+      <workItem from="1565719629930" duration="19223000" />
+      <workItem from="1565815996784" duration="2239000" />
+      <workItem from="1565898429906" duration="1573000" />
+      <workItem from="1565976382137" duration="5086000" />
     </task>
     <servers />
   </component>

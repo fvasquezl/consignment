@@ -7,8 +7,8 @@ use Closure;
 class Role
 {
     protected $hierarchy =[
-        'mi' => 3,
-        'sohnen' => 2,
+        'mi' => 2,
+        'sohnen' => 1,
     ];
 
     /**
