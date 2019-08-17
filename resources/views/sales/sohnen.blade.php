@@ -10,25 +10,11 @@
                 <table class="table table-striped table-bordered table-hover" id="products-table">
                     <thead>
                     <tr>
-                        <th>MITProductSKU</th>
                         <th>SupplierSKU</th>
-                        <th>UnitCost</th>
                         <th>Name</th>
+                        <th>UnitCost</th>
                         <th>OverallTotal QtyReceived</th>
                         <th>OverallTotal QtySold</th>
-                        <th>Consignment RemainingQty</th>
-                        <th>QOH</th>
-                        <th>QtySold</th>
-                        <th>AvgSelling Price</th>
-                        <th>TotalSales</th>
-                        <th>Shipping Charge</th>
-                        <th>Shipping Cost</th>
-                        <th>CostOf GoodsSold</th>
-                        <th>Marketplace FeesEstimate</th>
-                        <th>Marketplace NetProfit</th>
-                        <th>MarketplaceNet ProfitMargin</th>
-                        <th>MarketplaceGross ProfitMargin</th>
-                        <th>Marketplace ProfitMarkup</th>
                         <th>Supplier Payout</th>
                     </tr>
                     </thead>
@@ -37,7 +23,7 @@
         </div>
     </div>
 
-    @include('users.partials.modalUsersCreate')
+    @include('sales.partials.modalProductDetails')
 @stop
 
 {{-- page level styles --}}
@@ -71,7 +57,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 
-    <script src="{{ asset('js/common.js') }}"></script>
     <script>
         let $productsTable;
 
@@ -96,15 +81,14 @@
                 pageLength: 25,
                 lengthMenu: [[25, 50, 100, -1], [25, 50, 100, 'All']],
                 scrollY: "50vh",
-                scrollX: true,
                 scrollCollapse: true,
                 processing: true,
                 stateSave: true,
                 serverSide:true,
 
-                dom: '"<\'row\'<\'col-md-6\'B><\'col-md-6\'f>>" +\n' +
-                    '"<\'row\'<\'col-sm-12\'tr>>" +\n' +
-                    '"<\'row\'<\'col-sm-12 col-md-5\'i ><\'col-sm-12 col-md-7\'p>>"',
+                dom:"<'row'<'col-sm-12 col-md-6 d-flex justify-content-start'f><'col-sm-12 col-md-6 d-flex justify-content-end'B>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
 
                 buttons: {
                     dom: {
@@ -123,7 +107,7 @@
                             text: '<i class="fas fa-file-excel"></i> Excel',
                             title: 'Products to Excel',
                             titleAttr: 'Excel',
-                            className: 'btn btn-success',
+                            className: 'btn btn-success mr-1',
                             init: function(api, node, config) {
                                 $(node).removeClass('btn-secondary buttons-html5 buttons-excel')
                             },
@@ -137,46 +121,30 @@
                 },
 
                 ajax: {
-                    url: '{!! route('sales.index') !!}',
+                    url: '{!! route('sohnen.index') !!}',
                     data: function (d) {
-                        d.startDate = $('#startDate').val();
-                        d.endDate = $('#endDate').val();
                         d.salesRange=$('#salesRange').val();
                     }
                 },
 
                 columns: [
-                    {"data":"MITProductSKU",name:"MITProductSKU"},
                     {"data":"SupplierSKU",name:"SupplierSKU"},
-                    {"data":"UnitCost",name:"UnitCost"},
                     {"data":"Name",name:"Name"},
+                    {"data":"UnitCost",name:"UnitCost"},
                     {"data":"OverallTotalQtyReceived",name:"OverallTotalQtyReceived"},
                     {"data":"OverallTotalQtySold",name:"OverallTotalQtySold"},
-                    {"data":"ConsignmentRemainingQty",name:"ConsignmentRemainingQty"},
-                    {"data":"QOH",name:"QOH"},
-                    {"data":"QtySold",name:"QtySold"},
-                    {"data":"AvgSellingPrice",name:"AvgSellingPrice"},
-                    {"data":"TotalSales",name:"TotalSales"},
-                    {"data":"ShippingCharge",name:"ShippingCharge"},
-                    {"data":"ShippingCost",name:"ShippingCost"},
-                    {"data":"CostOfGoodsSold",name:"CostOfGoodsSold"},
-                    {"data":"MarketplaceFeesEstimate",name:"MarketplaceFeesEstimate"},
-                    {"data":"MarketplaceNetProfit",name:"MarketplaceNetProfit"},
-                    {"data":"MarketplaceNetProfitMargin",name:"MarketplaceNetProfitMargin"},
-                    {"data":"MarketplaceGrossProfitMargin",name:"MarketplaceGrossProfitMargin"},
-                    {"data":"MarketplaceProfitMarkup",name:"MarketplaceProfitMarkup"},
                     {"data":"SupplierPayout",name:"SupplierPayout"},
                 ],
                 columnDefs: [
                     {
-                        targets: 3,width: 500
+                        targets: 1,width: 500
                     },
                     {
-                        targets: [2,9,10,11,12,13,14,15,19],
+                        targets: [2,3,5],
                         className: "text-right",
                         render: $.fn.dataTable.render.number( ',', '.', 2, '$ ' )},
                     {
-                        targets: [0,4,5,6,7,8,16,17,18],
+                        targets: [0,4],
                         className: "text-center"
                     },
 
@@ -191,5 +159,102 @@
 
         });
 
+        $(document).on('click','.details-btn',function(e){
+            e.stopPropagation();
+            let $modalProductDetails =  $('#modalProductDetails');
+
+            let tr = $(this).closest('tr');
+            let row = $productsTable.row( tr );
+            let rowId = tr.attr('id');
+            let name = row.data().Name;
+
+            $modalProductDetails.on('shown.bs.modal', function(){
+                $(this).find(".modal-title").html("Details - "+rowId+" - "+name);
+
+                $(this).find(".modal-body").html(`<table class="table table-striped table-bordered table-hover " id="products-details">
+                    <thead>
+                    <tr>
+                        <th>OrderDate</th>
+                        <th>SupplierSKU</th>
+                        <th>UnitCost</th>
+                        <th>QtySold</th>
+                    </tr>
+                    </thead>
+                </table>`);
+
+
+                $('#products-details').DataTable({
+                    processing: true,
+                    pageLength: 25,
+                    lengthMenu: [[25, 50, 100, -1], [25, 50, 100, 'All']],
+                    scrollY: "45vh",
+
+                    dom: '"<\'row\'<\'col-md-6\'B><\'col-md-6\'f>>" +\n' +
+                        '"<\'row\'<\'col-sm-12\'tr>>" +\n' +
+                        '"<\'row\'<\'col-sm-12 col-md-5\'i ><\'col-sm-12 col-md-7\'p>>"',
+                    buttons: {
+                        dom: {
+                            container: {
+                                tag: 'div',
+                                className: 'flexcontent'
+                            },
+                            buttonLiner: {
+                                tag: null
+                            }
+                        },
+
+                        buttons: [
+                            {
+                                extend: 'excelHtml5',
+                                text: '<i class="fas fa-file-excel"></i> Excel',
+                                title: 'Products to Excel',
+                                titleAttr: 'Excel',
+                                className: 'btn btn-success',
+                                init: function(api, node, config) {
+                                    $(node).removeClass('btn-secondary buttons-html5 buttons-excel')
+                                },
+                            },
+                            {
+                                extend: 'pageLength',
+                                titleAttr: 'Show Records',
+                                className: 'btn selectTable btn-primary',
+                            },
+                        ],
+                    },
+
+                    ajax: {
+                        url: '{!! route('sohnen.details') !!}',
+                        data: function (d) {
+                            d.sku = rowId;
+                            d.salesRange=$('#salesRange').val();
+                        }
+                    },
+                    columns: [
+                        {"data": "OrderDate", name: "OrderDate"},
+                        {"data": "SupplierSKU", name: "SupplierSKU"},
+                        {"data": "UnitCost", name: "UnitCost"},
+                        {"data": "QtySold", name: "QtySold"},
+                    ],
+                    columnDefs: [
+                        {
+                            targets: [2,3],
+                            className: "text-right",
+                            render: $.fn.dataTable.render.number( ',', '.', 2, '$ ' )},
+                        {
+                            targets: [0,1],
+                            className: "text-center"
+                        },
+
+                    ]
+
+                });
+
+            }).modal('show');
+
+            $modalProductDetails.on('hidden.bs.modal', function(){
+                $(this).find(".modal-body").html('');
+            });
+        });
     </script>
+    <script src="{{ asset('js/common.js') }}"></script>
 @endpush

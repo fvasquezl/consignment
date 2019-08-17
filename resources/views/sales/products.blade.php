@@ -137,7 +137,7 @@
                 },
 
                 ajax: {
-                    url: '{!! route('sales.index') !!}',
+                    url: '{!! route('sales.products') !!}',
                     data: function (d) {
                         d.salesRange=$('#salesRange').val();
                     }
@@ -254,7 +254,7 @@
                     },
 
                     ajax: {
-                        url: '{!! route('sales.products') !!}',
+                        url: '{!! route('sales.details') !!}',
                         data: function (d) {
                             d.sku = rowId;
                             d.salesRange=$('#salesRange').val();

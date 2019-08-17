@@ -21,6 +21,14 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item">
+                    <a href="{{route('dashboard.index')}}"  class="{{(request()->is('dashboard') ? 'nav-link active' : 'nav-link')}}" >
+                        <i class="fas fa-tachometer-alt"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
                 @if (auth()->user()->role == 'mi')
                 <li class="nav-item has-treeview {{(request()->is('admin/users') ? 'menu-open' :  '')}}">
                     <a href="#" class="nav-link">
@@ -42,20 +50,23 @@
                 @endif
                 <li class="nav-item">
                     <a href="{{route('sales.index')}}"  class="{{(request()->is('sales') ? 'nav-link active' : 'nav-link')}}" >
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="fas fa-shipping-fast"></i>
                         <p>
                             Sales
                         </p>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a href="{{route('sales.index')}}"  class="{{(request()->is('sales') ? 'nav-link active' : 'nav-link')}}" >
-                        <i class="nav-icon fas fa-th"></i>
+{{--                    <a href="{{route('sales.index')}}"  class="{{(request()->is('sales') ? 'nav-link active' : 'nav-link')}}" >--}}
+                    <a href="#"  class="nav-link" >
+                        <i class="fas fa-project-diagram"></i>
                         <p>
                             Sales Details
                         </p>
                     </a>
                 </li>
+
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}"
