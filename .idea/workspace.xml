@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd7b8f57-8822-4c84-b773-0309fc9c2957" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/charts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SalesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Sales/ProductsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/partials/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sales/mi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales/products.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sales/sohnen.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales/sohnen.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,6 +49,13 @@
         <item name="Mitech" type="feb32156:DbDataSourceImpl" />
         <item name="MiTech: database" type="ccb7ac2a:MsImplModel$Database" />
         <item name="mi: schema" type="2865ee2e:MsImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Mitech" type="feb32156:DbDataSourceImpl" />
+        <item name="MiTech: database" type="ccb7ac2a:MsImplModel$Database" />
+        <item name="mi: schema" type="2865ee2e:MsImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -265,7 +269,7 @@
       <workItem from="1565719629930" duration="19223000" />
       <workItem from="1565815996784" duration="2239000" />
       <workItem from="1565898429906" duration="1573000" />
-      <workItem from="1565976382137" duration="17151000" />
+      <workItem from="1565976382137" duration="21278000" />
     </task>
     <servers />
   </component>
