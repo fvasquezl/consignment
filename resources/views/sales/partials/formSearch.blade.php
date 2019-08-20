@@ -1,12 +1,20 @@
-<form class="form-inline mb-3" id="mySearch">
-    <div class="form-group">
-        <label>Range:</label>
-
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="far fa-clock"></i></span>
+<form class="form-inline mb-3" id="MyForm">
+    <div class="form-group ">
+        <label for="dateFromPicker">From: </label>
+        <div class="input-group date " id="dateFromPicker" data-target-input="nearest">
+            <input type="text" class="form-control datetimepicker-input" id="dateFrom" data-target="#dateFromPicker"/>
+            <div class="input-group-append" data-target="#dateFromPicker" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
             </div>
-            <input type="text" class="form-control float-right" id="salesRange">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="dateFromPicker">To: </label>
+        <div class="input-group date" id="dateToPicker" data-target-input="nearest">
+            <input type="text" class="form-control datetimepicker-input" id="dateTo" data-target="#dateToPicker"/>
+            <div class="input-group-append" data-target="#dateToPicker" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
         </div>
     </div>
 

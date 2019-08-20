@@ -32,9 +32,8 @@ class ProductsController extends Controller
     public function products(Request $request)
     {
         if ($request->ajax()) {
-            $dates = explode(" - ", $request->salesRange);
 
-            $data = DB::select('exec [MiTech].[mi].[sp_SohnenSalesReport] ?,?',[$dates[0],$dates[1]]);
+            $data = DB::select('exec [MiTech].[mi].[sp_SohnenSalesReport] ?,?',[$request->dateFrom,$request->dateTo]);
 
             return Datatables::of($data)
                 ->editColumn('MIProductSKU', '<a href="#" class="details-btn">{{$MIProductSKU}}</a>')

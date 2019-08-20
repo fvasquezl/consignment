@@ -52,14 +52,13 @@
                     <a href="{{route('sales.index')}}"  class="{{(request()->is('sales') ? 'nav-link active' : 'nav-link')}}" >
                         <i class="fas fa-shipping-fast"></i>
                         <p>
-                            Sales
+                            Sales Snapshot
                         </p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-{{--                    <a href="{{route('sales.index')}}"  class="{{(request()->is('sales') ? 'nav-link active' : 'nav-link')}}" >--}}
-                    <a href="#"  class="nav-link" >
+                   <a href="{{route('details.index')}}"  class="{{(request()->is('details') ? 'nav-link active' : 'nav-link')}}" >
                         <i class="fas fa-project-diagram"></i>
                         <p>
                             Sales Details

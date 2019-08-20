@@ -31,7 +31,15 @@ Route::namespace('Sales')
 
         Route::get('/sales/sohnen','SohnenProductsController@index')->name('sohnen.index');
         Route::get('/sales/sohnen/details','SohnenProductsController@details')->name('sohnen.details');
+
+        Route::get('/details','ProductsController@index')->name('sales.index');
 });
+
+Route::namespace('Orders')
+    ->middleware('auth')
+    ->group(function(){
+        Route::get('/details','DetailsController@index')->name('details.index');
+    });
 
 
 

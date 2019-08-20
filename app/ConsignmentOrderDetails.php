@@ -10,4 +10,5 @@ class ConsignmentOrderDetails extends Model
     protected $primaryKey = 'CA Order ID';
     public $timestamps = false;
     protected $guarded = [];
+
 }
