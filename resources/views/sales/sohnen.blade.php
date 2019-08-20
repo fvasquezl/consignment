@@ -29,6 +29,8 @@
 {{-- page level styles --}}
 @push('styles')
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+
     <style>
         div.dt-buttons {
             float: none;
@@ -55,6 +57,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
 
 
     <script>
@@ -67,13 +70,17 @@
                 }
             });
 
-            $('#salesRange').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 30,
-                startDate: moment().subtract(30,'days'),
-                locale: {
-                    format: 'YYYY-MM-DD'
-                }
+            $('#dateFromPicker').datetimepicker({
+                defaultDate: moment().subtract(30,'days'),
+                format: 'YYYY-MM-DD',
+                autoclose: true,
+                todayBtn: true,
+            });
+            $('#dateToPicker').datetimepicker({
+                defaultDate: moment(),
+                format: 'YYYY-MM-DD',
+                autoclose: true,
+                todayBtn: true
             });
 
 
@@ -123,7 +130,8 @@
                 ajax: {
                     url: '{!! route('sohnen.index') !!}',
                     data: function (d) {
-                        d.salesRange=$('#salesRange').val();
+                        d.dateFrom=$('#dateFrom').val();
+                        d.dateTo=$('#dateTo').val();
                     }
                 },
 
@@ -140,11 +148,11 @@
                         targets: 1,width: 500
                     },
                     {
-                        targets: [2,3,5],
+                        targets: [2,5],
                         className: "text-right",
                         render: $.fn.dataTable.render.number( ',', '.', 2, '$ ' )},
                     {
-                        targets: [0,4],
+                        targets: [0,3,4],
                         className: "text-center"
                     },
 
@@ -152,9 +160,19 @@
             });
 
 
-            $('#mySearch').on('submit',function(e){
+
+            $('#MyForm').on('submit',function(e){
                 e.preventDefault();
-                $productsTable.draw();
+                let dateFrom=new Date($('#dateFrom').val());
+                let dateTo=new Date($('#dateTo').val());
+                if (dateFrom > dateTo){
+                    $('#dateFrom').addClass('is-invalid');
+                    $('#dateTo').addClass('is-invalid');
+                }else{
+                    $('#dateFrom').removeClass('is-invalid');
+                    $('#dateTo').removeClass('is-invalid');
+                    $productsTable.draw();
+                }
             });
 
         });
@@ -226,7 +244,8 @@
                         url: '{!! route('sohnen.details') !!}',
                         data: function (d) {
                             d.sku = rowId;
-                            d.salesRange=$('#salesRange').val();
+                            d.dateFrom=$('#dateFrom').val();
+                            d.dateTo=$('#dateTo').val();
                         }
                     },
                     columns: [
@@ -237,11 +256,11 @@
                     ],
                     columnDefs: [
                         {
-                            targets: [2,3],
+                            targets: [2],
                             className: "text-right",
                             render: $.fn.dataTable.render.number( ',', '.', 2, '$ ' )},
                         {
-                            targets: [0,1],
+                            targets: [0,1,3],
                             className: "text-center"
                         },
 

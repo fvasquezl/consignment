@@ -23,9 +23,8 @@ class SohnenProductsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $dates = explode(" - ", $request->salesRange);
 
-            $data = DB::select('exec [MiTech].[mi].[sp_SohnenSalesReport] ?,?',[$dates[0],$dates[1]]);
+            $data = DB::select('exec [MiTech].[mi].[sp_SohnenSalesReport] ?,?',[$request->dateFrom,$request->dateTo]);
 
             return Datatables::of($data)
                 ->editColumn('SupplierSKU', '<a href="#" class="details-btn">{{$SupplierSKU}}</a>')
@@ -42,10 +41,6 @@ class SohnenProductsController extends Controller
     public function details(Request $request)
     {
         if ($request->ajax()) {
-            // $dates = explode(" - ", $request->salesRange);
-
-//        $data = ConsignmentOrderDetails::where('MITProductSKU',$request->sku)
-//            ->whereBetween('OrderDate',[$dates[0],$dates[1]]);
             $data = ConsignmentOrderDetails::query();
 
 
@@ -53,10 +48,8 @@ class SohnenProductsController extends Controller
                 if($sku = $request->sku){
                     $query->where('SupplierSKU',$sku);
                 }
-                if($salesRange = $request->salesRange){
-                    $dates = explode(" - ", $request->salesRange);
-                    $query->whereBetween('OrderDate',[$dates[0],$dates[1]]);
-                }
+                    $query->whereBetween('OrderDate',[$request->dateFrom,$request->dateTo]);
+
             })
                 ->addIndexColumn()
                 ->rawColumns(['SupplierSKU'])
