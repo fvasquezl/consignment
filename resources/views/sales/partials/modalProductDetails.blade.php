@@ -1,5 +1,5 @@
 <div id="modalProductDetails" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
-    <div class="modal-dialog" style="max-width: 1450px!important;" role="document">
+    <div class="modal-dialog" style="max-width: 1430px!important;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="modelHeading"></h4>
