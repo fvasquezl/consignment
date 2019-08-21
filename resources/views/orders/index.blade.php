@@ -108,7 +108,7 @@
                 scrollCollapse: true,
                 processing: true,
                 stateSave: true,
-                serverSide:true,
+
 
                 dom:"<'row'<'col-sm-12 col-md-6 d-flex justify-content-start'f><'col-sm-12 col-md-6 d-flex justify-content-end'B>>" +
                     "<'row'<'col-sm-12'tr>>" +
