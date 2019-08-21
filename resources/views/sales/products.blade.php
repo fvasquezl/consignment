@@ -77,6 +77,7 @@
     <script src="{{ asset('js/common.js') }}"></script>
     <script>
         let $productsTable;
+        let $productsDetails;
 
         function format(d){
             let result = '';
@@ -207,14 +208,17 @@
                 let row = $productsTable.row( tr );
                 // let attributes = getRowData(row.data().SKU,'','/getAttribute');
                 let rowId = tr.attr('id');
-                let pictures = `http://photos.discount-merchant.com/photos/sku/`+rowId+`/index.php`;
+                let pictures = `<div>
+                                <object type="text/html" data="http://photos.discount-merchant.com/photos/sku/`+rowId+`/index.php" width="100%" height="100%"></object>
+                                </div>`;
+
 
                 if ( row.child.isShown() ) {
                     row.child.hide();
                     tr.removeClass('shown');
                 }
                 else {
-                    row.child( format(pictures) ).show();
+                    row.child( pictures ).show();
                     tr.addClass('shown');
                 }
             });
@@ -248,18 +252,26 @@
             $modalProductDetails.on('shown.bs.modal', function(){
                 $(this).find(".modal-title").html("Details - "+rowId+" - "+name);
 
-                $(this).find(".modal-body").html(`<table class="table table-striped table-bordered table-hover " id="products-details">
+                $(this).find(".modal-body").html(`<table class="table table-striped table-bordered " id="productsDetails">
                     <thead>
                     <tr>
-                        <th>OrderID</th><th>SiteName</th><th>AccountName</th><th>Profile_Id</th><th>Marketplace Order ID</th><th>OMOrderNum</th>
-                        <th>OrderDate</th><th>MarketplaceSKU</th><th>MappedProductSKU</th><th>SupplierID</th><th>SupplierSKU</th><th>UnitCost</th><th>QtySold</th>
-                        <th>UnitPrice</th><th>TaxPrice</th><th>ShippingPrice</th><th>ShippingCost</th><th>ShippingTaxPrice</th><th>TotalPrice</th>
+                        <th></th>
+                        <th>OrderID</th>
+                        <th>OMOrderID</th>
+                        <th>SupplierSKU</th>
+                        <th>UnitCost</th>
+                        <th>QtySold</th>
+                        <th>UnitPrice</th>
+                        <th>TaxPrice</th>
+                        <th>ShippingPrice</th>
+                        <th>ShippingCost</th>
+                        <th>ShippingTaxPrice</th>
+                        <th>TotalPrice</th>
                     </tr>
                     </thead>
                 </table>`);
 
-
-                $('#products-details').DataTable({
+                $productsDetails=$('#productsDetails').DataTable({
                     pageLength: 25,
                     lengthMenu: [[25, 50, 100, -1], [25, 50, 100, 'All']],
                     scrollY: "50vh",
@@ -308,16 +320,9 @@
                         }
                     },
                     columns: [
+                        {},
                         {"data": "CA Order ID", name: "CA Order ID"},
-                        {"data": "sitename", name: "sitename"},
-                        {"data": "AccountName", name: "AccountName"},
-                        {"data": "Profile_Id", name: "Profile_Id"},
-                        {"data": "Marketplace Order ID", name: "Marketplace Order ID"},
                         {"data": "OM Order Number", name: "OM Order Number"},
-                        {"data": "OrderDate", name: "OrderDate"},
-                        {"data": "MarketplaceSKU", name: "MarketplaceSKU"},
-                        {"data": "MappedProductSKU", name: "MappedProductSKU"},
-                        {"data": "SupplierID", name: "SupplierID"},
                         {"data": "SupplierSKU", name: "SupplierSKU"},
                         {"data": "UnitCost", name: "UnitCost"},
                         {"data": "QtySold", name: "QtySold"},
@@ -329,20 +334,54 @@
                         {"data": "TotalPrice", name: "TotalPrice"},
                     ],
                     columnDefs: [
-                    {
-                        targets: [1,2,4,6],width: 220
-                    },
-                    {
-                        targets: [11,13,14,15,16,17,18],
-                        className: "text-right",
-                        render: $.fn.dataTable.render.number( ',', '.', 2, '$ ' )},
-                    {
-                        targets: [0,3,4,5,6,7,8,9,10,12],
-                        className: "text-center"
-                    },
+                        {
+                            targets: 0,
+                            className: "details-control",
+                            orderable: false,
+                            data: null,
+                            defaultContent: ''
+                        },{
+                            targets: [4,6,7,8,9,10,11],
+                            className: "text-right",
+                            render: $.fn.dataTable.render.number( ',', '.', 2, '$ ' )
+                        },{
+                            targets: [1,2,3,5],
+                            className: "text-center"
+                        },
+                    ]
 
-                ]
+                });
 
+                $('#productsDetails tbody').on('click', 'td.details-control', function () {
+                    let tr = $(this).closest('tr');
+                    let row = $productsDetails.row( tr );
+
+                    let rowId = tr.attr('id');
+                    let table = ` <tr>
+                                        <td><b>SiteMap</b></td><td>`+row.data().sitename+`</td>
+                                        <td><b>OM Order Num</b></td><td>`+row.data().SupplierID+`</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>AccountName</b></td><td>`+row.data().AccountName+`</td>
+                                        <td><b>OrderDate</b></td><td>`+row.data().OrderDate+`</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Profile_Id</b></td><td>`+row.data().Profile_Id+`</td>
+                                        <td><b>MarketplaceSKU</b></td><td>`+row.data().MarketplaceSKU+`</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Marketplace Order ID</b></td><td>`+row.data()['Marketplace Order ID']+`</td>
+                                        <td><b>MappedProductSKU</b></td><td>`+row.data().MappedProductSKU+`</td>
+                                    </tr>`;
+
+                    if ( row.child.isShown() ) {
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    }
+                    else {
+                        row.child( table ).show();
+                        tr.addClass('shown');
+                    }
                 });
 
 

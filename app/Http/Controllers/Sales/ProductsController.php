@@ -62,9 +62,8 @@ class ProductsController extends Controller
             }
         })
             ->addIndexColumn()
-            ->rawColumns(['MappedProductSKU'])
             ->setRowId(function ($data) {
-                return $data->MappedProductSKU;
+                return $data->{'CA Order ID'};
             })->make(true);
         }
         return false;

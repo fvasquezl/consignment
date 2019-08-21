@@ -4,6 +4,7 @@
     <list default="true" id="dd7b8f57-8822-4c84-b773-0309fc9c2957" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Sales/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Sales/ProductsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/sales/partials/modalProductDetails.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales/partials/modalProductDetails.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/sales/products.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales/products.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -227,17 +228,7 @@
       <serviceView>
         <option name="contentProportion" value="0.16251354" />
         <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@55ad1a79" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@55ad1a79" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@5e4fa397" type="9fbbdea:ServiceModel$ServiceNode" />
-            </path>
-          </expand>
+          <expand />
           <select />
         </treeState>
       </serviceView>
@@ -269,7 +260,7 @@
       <workItem from="1565815996784" duration="2239000" />
       <workItem from="1565898429906" duration="1573000" />
       <workItem from="1565976382137" duration="41910000" />
-      <workItem from="1566349106322" duration="3871000" />
+      <workItem from="1566349106322" duration="12409000" />
     </task>
     <servers />
   </component>
