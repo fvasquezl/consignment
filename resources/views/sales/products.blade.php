@@ -7,9 +7,10 @@
 
                 @include('sales.partials.formSearch')
 
-                <table class="table table-striped table-bordered table-hover" id="products-table">
+                <table class="table table-striped table-bordered table-hover" id="productsTable">
                     <thead>
                     <tr>
+                        <th></th>
                         <th>MIProductSKU</th>
                         <th>SupplierSKU</th>
                         <th>UnitCost</th>
@@ -45,12 +46,13 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
     <style>
-        div.dt-buttons {
-            float: none;
-            text-align: center;
+        td.details-control {
+            background: url('img/details_open.png') no-repeat center center;
+            cursor:pointer;
         }
-        .table tbody tr:hover td, .table tbody tr:hover th {
-            background-color: lightgoldenrodyellow;
+
+        tr.shown td.details-control {
+            background: url('img/details_close.png') no-repeat center center;
         }
     </style>
 @endpush
@@ -76,6 +78,13 @@
     <script>
         let $productsTable;
 
+        function format(d){
+            let result = '';
+           return `<div>
+                <object type="text/html" data="`+d+`" width="100%" height="100%"></object>
+            </div>`;
+        }
+
         $(function () {
             $.ajaxSetup({
                 headers: {
@@ -97,10 +106,10 @@
             });
 
 
-            $productsTable = $('#products-table').DataTable({
+            $productsTable = $('#productsTable').DataTable({
                 pageLength: 25,
                 lengthMenu: [[25, 50, 100, -1], [25, 50, 100, 'All']],
-                scrollY: "50vh",
+                scrollY: "60vh",
                 scrollX: true,
                 scrollCollapse: true,
                 processing: true,
@@ -150,6 +159,7 @@
                 },
 
                 columns: [
+                    {},
                     {"data":"MIProductSKU",name:"MIProductSKU"},
                     {"data":"SupplierSKU",name:"SupplierSKU"},
                     {"data":"UnitCost",name:"UnitCost"},
@@ -173,18 +183,40 @@
                 ],
                 columnDefs: [
                     {
-                        targets: 3,width: 500
-                    },
-                    {
-                        targets: [2,9,10,11,12,13,14,15,19],
+                        targets: 0,
+                        className: "details-control",
+                        orderable: false,
+                        data: null,
+                        defaultContent: ''
+                    },{
+                        targets: 4,width: 500
+                    },{
+                        targets: [3,10,11,12,13,14,15,16,20],
                         className: "text-right",
                         render: $.fn.dataTable.render.number( ',', '.', 2, '$ ' )},
                     {
-                        targets: [0,4,5,6,7,8,16,17,18],
+                        targets: [1,5,6,7,8,9,17,18,19],
                         className: "text-center"
                     },
 
                 ]
+            });
+
+            $('#productsTable tbody').on('click', 'td.details-control', function () {
+                let tr = $(this).closest('tr');
+                let row = $productsTable.row( tr );
+                // let attributes = getRowData(row.data().SKU,'','/getAttribute');
+                let rowId = tr.attr('id');
+                let pictures = `http://photos.discount-merchant.com/photos/sku/`+rowId+`/index.php`;
+
+                if ( row.child.isShown() ) {
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    row.child( format(pictures) ).show();
+                    tr.addClass('shown');
+                }
             });
 
 

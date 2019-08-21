@@ -36,9 +36,9 @@ class ProductsController extends Controller
             $data = DB::select('exec [MiTech].[mi].[sp_SohnenSalesReport] ?,?',[$request->dateFrom,$request->dateTo]);
 
             return Datatables::of($data)
-                ->editColumn('MIProductSKU', '<a href="#" class="details-btn">{{$MIProductSKU}}</a>')
+                ->editColumn('OverallTotalQtySold', '<a href="#" class="details-btn">{{$OverallTotalQtySold}}</a>')
                 ->addIndexColumn()
-                ->rawColumns(['MIProductSKU'])
+                ->rawColumns(['OverallTotalQtySold'])
                 ->setRowId(function ($data) {
                     return $data->MIProductSKU;
                 })->make(true);
@@ -49,12 +49,8 @@ class ProductsController extends Controller
     public function details(Request $request)
     {
         if ($request->ajax()) {
-           // $dates = explode(" - ", $request->salesRange);
 
-//        $data = ConsignmentOrderDetails::where('MITProductSKU',$request->sku)
-//            ->whereBetween('OrderDate',[$dates[0],$dates[1]]);
         $data = ConsignmentOrderDetails::query();
-
 
         return Datatables::of($data)->filter(function($query) use($request){
             if($sku = $request->sku){
