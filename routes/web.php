@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 
 Route::get('dashboard','DashboardController@index')->name('dashboard.index');
+Route::get('getTotalSales','DashboardController@getTotalSales')->name('dashboard.getTotalSales');
+Route::get('getProducts','DashboardController@getProducts')->name('dashboard.getProducts');
+Route::get('getTopTeen','DashboardController@getTopTeen')->name('dashboard.getTopTeen');
 
 Route::prefix('/admin')->namespace('Admin')->middleware('auth','role:mi')->group(function(){
     Route::resource('users','UsersController');

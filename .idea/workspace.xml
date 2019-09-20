@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd7b8f57-8822-4c84-b773-0309fc9c2957" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/laravel-plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sales/partials/modalProductDetails.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales/partials/modalProductDetails.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/charts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,10 +37,6 @@
     <expand>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="Inventory" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="Mitech" type="feb32156:DbDataSourceImpl" />
       </path>
       <path>
@@ -47,13 +49,6 @@
         <item name="Mitech" type="feb32156:DbDataSourceImpl" />
         <item name="MiTech: database" type="ccb7ac2a:MsImplModel$Database" />
         <item name="mi: schema" type="2865ee2e:MsImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="Mitech" type="feb32156:DbDataSourceImpl" />
-        <item name="MiTech: database" type="ccb7ac2a:MsImplModel$Database" />
-        <item name="mi: schema" type="2865ee2e:MsImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -67,11 +62,8 @@
         <item name="Mitech" type="feb32156:DbDataSourceImpl" />
         <item name="MiTech: database" type="ccb7ac2a:MsImplModel$Database" />
         <item name="mi: schema" type="2865ee2e:MsImplModel$Schema" />
-        <item name="routines" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="Remotes" type="feb32156:DbDataSourceImpl" />
+        <item name="views" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="vw_ConsignmentOrderDetails: view" type="5f18b29c:MsImplModel$View" />
       </path>
     </expand>
     <select />
@@ -226,7 +218,17 @@
       <serviceView>
         <option name="contentProportion" value="0.16251354" />
         <treeState>
-          <expand />
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@b635133e" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@b635133e" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@657473b5" type="9fbbdea:ServiceModel$ServiceNode" />
+            </path>
+          </expand>
           <select />
         </treeState>
       </serviceView>
@@ -259,6 +261,8 @@
       <workItem from="1565898429906" duration="1573000" />
       <workItem from="1565976382137" duration="41910000" />
       <workItem from="1566349106322" duration="12844000" />
+      <workItem from="1568660022010" duration="2523000" />
+      <workItem from="1568914664140" duration="17902000" />
     </task>
     <servers />
   </component>

@@ -1,3 +1,21 @@
+function getData(url){
+    let result = '';
+    let request = $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        async: false
+    });
+    request.done(function(ret) {
+        return result = ret;
+    });
+    return result;
+}
+
+function currencyFormat(num) {
+    return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+
 $(function () {
     'use strict';
 
@@ -8,24 +26,98 @@ $(function () {
 
     let mode      = 'index';
     let intersect = true;
+    let sales = getData('/getTotalSales');
+    let products = getData('/getProducts');
 
-    let $salesChart = $('#sales-chart')
-    let salesChart  = new Chart($salesChart, {
+    $('#profit').append(currencyFormat(sales.profit));
+    $('#totalProducts').append(products.qtyProducts);
+
+
+
+    let $productsChart = $('#products-chart');
+    let productsChart  = new Chart($productsChart, {
         type   : 'bar',
         data   : {
-            labels  : ['JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+            labels  : products.months,
             datasets: [
                 {
                     backgroundColor: '#007bff',
                     borderColor    : '#007bff',
-                    data           : [1000, 2000, 3000, 2500, 2700, 2500, 3000]
+                    data           : products.qtySold
                 },
-                {
-                    backgroundColor: '#ced4da',
-                    borderColor    : '#ced4da',
-                    data           : [700, 1700, 2700, 2000, 1800, 1500, 2000]
-                }
+                // {
+                //     backgroundColor: '#ced4da',
+                //     borderColor    : '#ced4da',
+                //     data           : sales.totalCost
+                // }
             ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            tooltips           : {
+                mode     : mode,
+                intersect: intersect
+            },
+            hover              : {
+                mode     : mode,
+                intersect: intersect
+            },
+            legend             : {
+                display: false
+            },
+            scales             : {
+                yAxes: [{
+                    // display: false,
+                    gridLines: {
+                        display      : true,
+                        lineWidth    : '4px',
+                        color        : 'rgba(0, 0, 0, .2)',
+                        zeroLineColor: 'transparent'
+                    },
+                    ticks    : $.extend({
+                        beginAtZero: true,
+                    }, ticksStyle)
+                }],
+                xAxes: [{
+                    display  : true,
+                    gridLines: {
+                        display: false
+                    },
+                    ticks    : ticksStyle
+                }]
+            }
+        }
+    });
+
+
+
+
+    let $salesChart = $('#sales-chart')
+    let salesChart  = new Chart($salesChart, {
+        data   : {
+            labels  : sales.months,
+            datasets: [{
+                type                : 'line',
+                data                : sales.totalSales,
+                backgroundColor     : 'transparent',
+                borderColor         : '#007bff',
+                pointBorderColor    : '#007bff',
+                pointBackgroundColor: '#007bff',
+                fill                : false
+                // pointHoverBackgroundColor: '#007bff',
+                // pointHoverBorderColor    : '#007bff'
+            },
+                {
+                    type                : 'line',
+                    data                : sales.totalCost,
+                    backgroundColor     : 'tansparent',
+                    borderColor         : '#ced4da',
+                    pointBorderColor    : '#ced4da',
+                    pointBackgroundColor: '#ced4da',
+                    fill                : false
+                    // pointHoverBackgroundColor: '#ced4da',
+                    // pointHoverBorderColor    : '#ced4da'
+                }]
         },
         options: {
             maintainAspectRatio: false,
@@ -71,70 +163,7 @@ $(function () {
                 }]
             }
         }
-    });
-
-    let $visitorsChart = $('#visitors-chart')
-    let visitorsChart  = new Chart($visitorsChart, {
-        data   : {
-            labels  : ['18th', '20th', '22nd', '24th', '26th', '28th', '30th'],
-            datasets: [{
-                type                : 'line',
-                data                : [100, 120, 170, 167, 180, 177, 160],
-                backgroundColor     : 'transparent',
-                borderColor         : '#007bff',
-                pointBorderColor    : '#007bff',
-                pointBackgroundColor: '#007bff',
-                fill                : false
-                // pointHoverBackgroundColor: '#007bff',
-                // pointHoverBorderColor    : '#007bff'
-            },
-                {
-                    type                : 'line',
-                    data                : [60, 80, 70, 67, 80, 77, 100],
-                    backgroundColor     : 'tansparent',
-                    borderColor         : '#ced4da',
-                    pointBorderColor    : '#ced4da',
-                    pointBackgroundColor: '#ced4da',
-                    fill                : false
-                    // pointHoverBackgroundColor: '#ced4da',
-                    // pointHoverBorderColor    : '#ced4da'
-                }]
-        },
-        options: {
-            maintainAspectRatio: false,
-            tooltips           : {
-                mode     : mode,
-                intersect: intersect
-            },
-            hover              : {
-                mode     : mode,
-                intersect: intersect
-            },
-            legend             : {
-                display: false
-            },
-            scales             : {
-                yAxes: [{
-                    // display: false,
-                    gridLines: {
-                        display      : true,
-                        lineWidth    : '4px',
-                        color        : 'rgba(0, 0, 0, .2)',
-                        zeroLineColor: 'transparent'
-                    },
-                    ticks    : $.extend({
-                        beginAtZero : true,
-                        suggestedMax: 200
-                    }, ticksStyle)
-                }],
-                xAxes: [{
-                    display  : true,
-                    gridLines: {
-                        display: false
-                    },
-                    ticks    : ticksStyle
-                }]
-            }
-        }
     })
-})
+
+});
+
